@@ -2,15 +2,13 @@ import { Role } from '@/config/roles';
 import { Routes } from '@/config/routes';
 
 export const roleDefaultRoutes: Record<Role, string> = {
-  [Role.SUPER_ADMIN]: Routes.superAdmin.dashboard,
-  [Role.MANAGER]:     Routes.manager.dashboard,
-  [Role.STAFF]:       Routes.staff.dashboard,
+  [Role.TEACHER]: Routes.teacher.dashboard,
 };
 
-const roleRoutePrefix: Record<Role, string> = {
-  [Role.SUPER_ADMIN]: '/super-admin',
-  [Role.MANAGER]:     '/manager',
-  [Role.STAFF]:       '/staff',
+const teacherRoutePrefixes = ['/dashboard', '/students', '/scores', '/reports'];
+
+const roleRoutePrefix: Record<Role, string[]> = {
+  [Role.TEACHER]: teacherRoutePrefixes,
 };
 
 export function getDefaultRoute(role: Role): string {
@@ -18,5 +16,5 @@ export function getDefaultRoute(role: Role): string {
 }
 
 export function canAccessRoute(role: Role, pathname: string): boolean {
-  return pathname.startsWith(roleRoutePrefix[role]);
+  return roleRoutePrefix[role]?.some((prefix) => pathname.startsWith(prefix)) ?? false;
 }

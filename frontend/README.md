@@ -34,10 +34,8 @@ Frontend runs on `http://localhost:5000`. Backend must be running on port 3000 �
 ```
 src/
 ├── app/                    # Next.js pages (App Router)
-│   ├── (auth)/             # Login, forgot-password — no sidebar
-│   ├── (super-admin)/      # Super Admin pages — role-protected
-│   ├── (manager)/          # Manager pages — role-protected
-│   ├── (staff)/            # Staff pages — role-protected
+│   ├── (auth)/             # Login, forgot-password
+│   ├── (teacher)/          # Teacher dashboard and academic administration
 │   └── not-authorized/     # Shown on role mismatch
 │
 ├── components/
@@ -88,14 +86,15 @@ NestJS Backend  →  http://localhost:3000/api/v1
 
 ## Route → Role Mapping
 
-| URL prefix                   | Role          | Protected by        |
-|------------------------------|---------------|---------------------|
-| `/login`, `/forgot-password` | Public        | —                   |
-| `/super-admin/*`             | `super_admin` | `src/middleware.ts` |
-| `/manager/*`                 | `manager`     | `src/middleware.ts` |
-| `/staff/*`                   | `staff`       | `src/middleware.ts` |
+| URL prefix                   | Role      | Protected by        |
+|------------------------------|-----------|---------------------|
+| `/login`, `/forgot-password` | Public    | —                   |
+| `/dashboard/*`               | `teacher` | `src/proxy.ts`      |
+| `/students/*`                | `teacher` | `src/proxy.ts`      |
+| `/scores/*`                  | `teacher` | `src/proxy.ts`      |
+| `/reports/*`                 | `teacher` | `src/proxy.ts`      |
 
-`middleware.ts` reads the `access_token` cookie, decodes the role claim, and redirects to `/not-authorized` if the role doesn't match.
+`proxy.ts` is currently a development pass-through and should be enabled when backend authentication is available.
 
 ---
 
@@ -105,7 +104,7 @@ NestJS Backend  →  http://localhost:3000/api/v1
 2. `src/features/<name>/services/<name>.service.ts` — HTTP calls via `lib/api`.
 3. `src/features/<name>/store/<name>.store.ts` — Zustand store (state + actions).
 4. `src/features/<name>/components/` — UI components that read from the store.
-5. Wire the page in `src/app/(role)/<role>/<name>/page.tsx`.
+5. Wire the page in `src/app/(teacher)/<name>/page.tsx`.
 
 ---
 
