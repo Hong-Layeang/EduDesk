@@ -5,8 +5,10 @@ import { join } from 'path';
 config();
 
 import { Category } from '../modules/categories/entities/category.entity';
+import { Student } from '../modules/students/entities/student.entity';
+import { Class } from '../modules/classes/entities/class.entity';
 
-const entities = [Category];
+const entities = [Category, Student, Class];
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',

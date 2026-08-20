@@ -17,7 +17,8 @@ export const teacherProfile: TeacherProfile = {
 export const dashboardStats: DashboardStats = {
   totalStudents: 142,
   totalClasses: 4,
-  gradeRange: 'ថ្នាក់ទី៣ ដល់ទី៦',
+  minGrade: 3,
+  maxGrade: 6,
 };
 
 export const classSummaries: ClassSummary[] = [

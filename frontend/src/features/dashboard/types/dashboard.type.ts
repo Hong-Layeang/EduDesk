@@ -7,7 +7,8 @@ export interface TeacherProfile {
 export interface DashboardStats {
   totalStudents: number;
   totalClasses: number;
-  gradeRange: string;
+  minGrade: number;
+  maxGrade: number;
 }
 
 export interface ClassSummary {
@@ -15,5 +16,5 @@ export interface ClassSummary {
   gradeLabel: string;
   className: string;
   studentCount: number;
-  thumbnailUrl: string;
+  thumbnailUrl: string | null;
 }

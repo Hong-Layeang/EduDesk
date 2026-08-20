@@ -21,6 +21,9 @@ import { LoggingInterceptor, ResponseInterceptor } from './common/interceptors';
 import { AllExceptionsFilter } from './common/interceptors/catch-everything';
 import { AppThrottlerGuard } from './common/guards';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { StudentsModule } from './modules/students/students.module';
+import { ClassesModule } from './modules/classes/classes.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -64,9 +67,11 @@ import { CategoriesModule } from './modules/categories/categories.module';
     DatabaseModule,
     CommonModule,
     CategoriesModule,
+    ClassesModule,
+    StudentsModule,
+    DashboardModule,
     // More feature modules go here:
     // UsersModule,
-    // MenuModule,
     // OrdersModule,
   ],
   controllers: [AppController],

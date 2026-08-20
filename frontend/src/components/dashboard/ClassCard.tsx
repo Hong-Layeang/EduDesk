@@ -9,7 +9,7 @@ export function ClassCard({ classItem }: { classItem: ClassSummary }) {
       className="flex items-center gap-3 rounded-2xl bg-white p-3 shadow-sm ring-1 ring-slate-900/5 transition-colors hover:bg-blue-50/60"
     >
       <img
-        src={classItem.thumbnailUrl}
+        src={classItem.thumbnailUrl ?? '/placeholder.svg'}
         alt={classItem.className}
         className="h-14 w-14 shrink-0 rounded-xl object-cover"
       />

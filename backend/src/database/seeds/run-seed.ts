@@ -1,6 +1,8 @@
 import { DataSource } from 'typeorm';
 import { dataSourceOptions } from '../data-source';
 import { seedCategories } from './category.seed';
+import { seedClasses } from './class.seed';
+import { seedStudents } from './student.seed';
 
 async function runSeed() {
   const dataSource = new DataSource(dataSourceOptions);
@@ -9,6 +11,8 @@ async function runSeed() {
   console.log('Running seeds...');
 
   await seedCategories(dataSource);
+  await seedClasses(dataSource);
+  await seedStudents(dataSource);
 
   await dataSource.destroy();
   console.log('Seeds complete.');
