@@ -1,31 +1,54 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Search, X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
+import { cn } from '@/utils/cn';
 
 interface SearchInputProps {
   placeholder?: string;
   debounceMs?: number;
   onSearch: (value: string) => void;
+  className?: string;
 }
 
-export function SearchInput({ placeholder = 'Search…', debounceMs = 300, onSearch }: SearchInputProps) {
+export function SearchInput({
+  placeholder = 'Search…',
+  debounceMs = 300,
+  onSearch,
+  className,
+}: SearchInputProps) {
   const [value, setValue] = useState('');
   const debounced = useDebounce(value, debounceMs);
 
-  useEffect(() => { onSearch(debounced); }, [debounced, onSearch]);
+  useEffect(() => {
+    onSearch(debounced);
+  }, [debounced, onSearch]);
 
   return (
-    <div className="relative">
-      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-      <Input
+    <div
+      className={cn(
+        'flex items-center gap-2 rounded-2xl bg-white px-3.5 py-2.5 shadow-sm ring-1 ring-slate-900/5 transition-colors focus-within:ring-2 focus-within:ring-blue-500/40',
+        className,
+      )}
+    >
+      <Search className="h-4 w-4 shrink-0 text-slate-400" />
+      <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        className="pl-9"
+        className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
       />
+      {value && (
+        <button
+          type="button"
+          onClick={() => setValue('')}
+          aria-label="សម្អាតការស្វែងរក"
+          className="shrink-0 rounded-full p-0.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      )}
     </div>
   );
 }

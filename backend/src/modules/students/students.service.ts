@@ -61,10 +61,7 @@ export class StudentsService {
     if (classId) baseWhere.classId = classId;
 
     const where = search
-      ? [
-          { ...baseWhere, khmerName: ILike(`%${search}%`) },
-          { ...baseWhere, englishName: ILike(`%${search}%`) },
-        ]
+      ? { ...baseWhere, khmerName: ILike(`%${search}%`) }
       : baseWhere;
 
     const [data, total] = await this.studentRepo.findAndCount({

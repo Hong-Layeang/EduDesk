@@ -3,7 +3,7 @@ import { IsOptional, IsString, MaxLength } from 'class-validator';
 import { PaginationQueryDto } from '../../../common/dto/pagination-query.dto';
 
 export class QueryStudentDto extends PaginationQueryDto {
-  @ApiPropertyOptional({ example: 'dara', description: 'Matches Khmer or English name' })
+  @ApiPropertyOptional({ example: 'ដារា', description: 'Matches Khmer name' })
   @IsOptional()
   @IsString()
   @MaxLength(100)

@@ -3,7 +3,6 @@ export type Gender = 'male' | 'female';
 export interface Student {
   id: string;
   khmerName: string;
-  englishName: string;
   gender: Gender;
   classId: string;
   className: string;

@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Plus } from 'lucide-react';
+import { useEffect, useMemo } from 'react';
+import { Plus, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/shared/SearchInput';
 import { EmptyState } from '@/components/shared/EmptyState';
@@ -31,15 +31,23 @@ export default function StudentsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const totalStudentsCount = useMemo(
+    () => classes.reduce((sum, option) => sum + option.count, 0),
+    [classes],
+  );
+
   return (
     <div className="flex flex-1 flex-col">
-      <div className="sticky top-0 z-10 space-y-4 bg-slate-50/95 px-4 pb-4 pt-5 backdrop-blur">
+      <div className="sticky top-0 z-10 space-y-4 border-b border-slate-100 bg-slate-50/95 px-4 pb-4 pt-5 backdrop-blur">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-slate-900">សិស្ស</h1>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">សិស្ស</h1>
+            <p className="text-xs text-slate-400">គ្រប់គ្រងព័ត៌មានសិស្សទាំងអស់របស់អ្នក</p>
+          </div>
           <Button
             size="icon"
             aria-label="បន្ថែមសិស្សថ្មី"
-            className="rounded-full bg-blue-600 shadow-md shadow-blue-600/30 hover:bg-blue-700"
+            className="h-11 w-11 rounded-full bg-blue-600 shadow-md shadow-blue-600/30 hover:bg-blue-700"
           >
             <Plus className="h-5 w-5" />
           </Button>
@@ -47,11 +55,16 @@ export default function StudentsPage() {
 
         <SearchInput placeholder="ស្វែងរកតាមឈ្មោះ..." onSearch={setSearch} />
 
-        <ClassFilterPills classes={classes} activeClassId={activeClassId} onSelect={setActiveClass} />
+        <ClassFilterPills
+          classes={classes}
+          activeClassId={activeClassId}
+          totalCount={totalStudentsCount}
+          onSelect={setActiveClass}
+        />
       </div>
 
-      <div className="flex-1 space-y-3 px-4 pb-6">
-        <p className="text-sm text-slate-400">
+      <div className="flex-1 space-y-3 px-4 pb-6 pt-4">
+        <p className="px-1 text-sm text-slate-400">
           {isLoading ? 'កំពុងទាញយកទិន្នន័យ...' : `សិស្ស ${toKhmerNumeral(total)} នាក់ត្រូវបានរកឃើញ`}
         </p>
 
@@ -67,6 +80,7 @@ export default function StudentsPage() {
           </div>
         ) : students.length === 0 ? (
           <EmptyState
+            icon={<Search className="h-7 w-7 text-blue-400" />}
             title="រកមិនឃើញសិស្សទេ"
             description="សូមព្យាយាមស្វែងរកម្ដងទៀត ឬជ្រើសរើសថ្នាក់ផ្សេង"
           />

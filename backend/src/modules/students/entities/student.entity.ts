@@ -21,10 +21,6 @@ export class Student {
   @Column({ name: 'khmer_name', length: 100 })
   khmerName!: string;
 
-  @Index()
-  @Column({ name: 'english_name', length: 100 })
-  englishName!: string;
-
   @Column({ type: 'enum', enum: Gender })
   gender!: Gender;
 

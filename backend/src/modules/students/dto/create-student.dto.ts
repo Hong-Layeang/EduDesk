@@ -9,12 +9,6 @@ export class CreateStudentDto {
   @MaxLength(100)
   khmerName!: string;
 
-  @ApiProperty({ example: 'Chan Dara' })
-  @IsString()
-  @IsNotEmpty()
-  @MaxLength(100)
-  englishName!: string;
-
   @ApiProperty({ enum: Gender, example: Gender.MALE })
   @IsEnum(Gender)
   gender!: Gender;
