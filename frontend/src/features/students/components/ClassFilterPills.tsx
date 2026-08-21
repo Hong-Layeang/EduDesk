@@ -18,7 +18,7 @@ export function ClassFilterPills({
   onSelect,
 }: ClassFilterPillsProps) {
   return (
-    <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
+    <div className="no-scrollbar flex gap-2 overflow-x-auto py-1">
       <Pill
         label="ថ្នាក់ទាំងអស់"
         count={totalCount}
@@ -54,9 +54,9 @@ function Pill({
       type="button"
       onClick={onClick}
       className={cn(
-        'flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors',
+        'flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 active:scale-[0.97]',
         active
-          ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/20'
+          ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/20'
           : 'bg-white text-slate-500 ring-1 ring-slate-200 hover:bg-slate-50',
       )}
     >

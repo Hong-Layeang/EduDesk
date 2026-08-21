@@ -24,3 +24,12 @@ export interface FindStudentsParams {
   search?: string;
   classId?: string;
 }
+
+export interface CreateStudentPayload {
+  khmerName: string;
+  gender: Gender;
+  classId: string;
+  className: string;
+  rollNumber: string;
+  avatarUrl?: string;
+}

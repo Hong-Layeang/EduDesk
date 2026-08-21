@@ -6,6 +6,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { cn } from '@/utils/cn';
 
 interface SearchInputProps {
+  value?: string;
   placeholder?: string;
   debounceMs?: number;
   onSearch: (value: string) => void;
@@ -13,22 +14,31 @@ interface SearchInputProps {
 }
 
 export function SearchInput({
-  placeholder = 'Search…',
+  value: externalValue,
+  placeholder = 'ស្វែងរក...',
   debounceMs = 300,
   onSearch,
   className,
 }: SearchInputProps) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(externalValue ?? '');
   const debounced = useDebounce(value, debounceMs);
 
   useEffect(() => {
     onSearch(debounced);
-  }, [debounced, onSearch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounced]);
+
+  useEffect(() => {
+    if (externalValue !== undefined && externalValue !== value) {
+      setValue(externalValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalValue]);
 
   return (
     <div
       className={cn(
-        'flex items-center gap-2 rounded-2xl bg-white px-3.5 py-2.5 shadow-sm ring-1 ring-slate-900/5 transition-colors focus-within:ring-2 focus-within:ring-blue-500/40',
+        'flex items-center gap-2 rounded-2xl bg-white px-3.5 py-2.5 shadow-sm ring-1 ring-slate-900/5 transition-colors focus-within:ring-2 focus-within:ring-primary/40',
         className,
       )}
     >
