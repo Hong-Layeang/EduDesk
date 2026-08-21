@@ -24,6 +24,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { StudentsModule } from './modules/students/students.module';
 import { ClassesModule } from './modules/classes/classes.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ScoresModule } from './modules/scores/scores.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     ClassesModule,
     StudentsModule,
     DashboardModule,
+    ScoresModule,
     // More feature modules go here:
     // UsersModule,
     // OrdersModule,

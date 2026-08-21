@@ -7,8 +7,9 @@ config();
 import { Category } from '../modules/categories/entities/category.entity';
 import { Student } from '../modules/students/entities/student.entity';
 import { Class } from '../modules/classes/entities/class.entity';
+import { Score } from '../modules/scores/entities/score.entity';
 
-const entities = [Category, Student, Class];
+const entities = [Category, Student, Class, Score];
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
